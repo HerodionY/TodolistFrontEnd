@@ -6,6 +6,7 @@ import LoginForm from './component/LoginForm';
 import RegisterForm from './component/RegisterForm';
 import TodoList from './component/TodoList';
 import { Container, Typography, Button, Box } from '@mui/material';
+import LoginPage from './page/LoginPage';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -19,6 +20,8 @@ const App = () => {
             <Button variant="contained" color="secondary" onClick={() => setUser(null)}>
               Logout
             </Button>
+            
+            
           )}
         </Box>
 
@@ -48,22 +51,4 @@ const App = () => {
 
 export default App;
 
-// Custom LoginPage to handle login routing
-const LoginPage = ({ onLogin }) => {
-  const navigate = useNavigate();
-  const handleLogin = (userData) => {
-    onLogin(userData);
-    navigate('/todos'); // Redirect to todos after login
-  };
 
-  return (
-    <Container>
-      <LoginForm onLogin={handleLogin} />
-      <Box mt={2}>
-        <Button component={Link} to="/register" variant="outlined" color="primary">
-          Register Here
-        </Button>
-      </Box>
-    </Container>
-  );
-};

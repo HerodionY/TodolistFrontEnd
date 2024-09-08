@@ -1,10 +1,16 @@
-// src/pages/LoginPage.jsx
-
 import React from 'react';
+import { Container, Button, Box } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 import LoginForm from '../component/LoginForm';
-import { Container, Box, Typography } from '@mui/material';
 
 const LoginPage = ({ onLogin }) => {
+  const navigate = useNavigate();
+
+  const handleLogin = (userData) => {
+    onLogin(userData); // Panggil fungsi onLogin yang diberikan dari App
+    navigate('/todos'); // Redirect ke halaman todos setelah login
+  };
+
   return (
     <Container maxWidth="sm">
       <Box 
@@ -14,8 +20,18 @@ const LoginPage = ({ onLogin }) => {
         alignItems="center" 
         minHeight="100vh"
       >
-        <Typography variant="h4" gutterBottom>Login to Your Account</Typography>
-        <LoginForm onLogin={onLogin} />
+        <LoginForm onLogin={handleLogin} />
+        <Box mt={2}>
+          <Button
+            component={Link}
+            to="/register"
+            variant="outlined"
+            color="primary"
+            sx={{width:'450px'}}
+          >
+            Register Here
+          </Button>
+        </Box>
       </Box>
     </Container>
   );

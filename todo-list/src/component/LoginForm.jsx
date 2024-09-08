@@ -1,5 +1,3 @@
-// src/component/LoginForm.jsx
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { TextField, Button, Typography, Box } from '@mui/material';
@@ -13,8 +11,11 @@ const LoginForm = ({ onLogin }) => {
     event.preventDefault();
     try {
       // Pastikan data yang dikirim sesuai dengan format yang diharapkan oleh API
-      const response = await axios.post('http://localhost:8081/api/users/login', { username, password });
-      // Panggil onLogin dengan data pengguna
+      const response = await axios.post('http://localhost:8081/api/users/login', {
+        username,
+        password,
+      });
+      // Panggil onLogin dengan data pengguna dari response
       onLogin(response.data);
     } catch (error) {
       setError('Invalid username or password');
@@ -41,7 +42,11 @@ const LoginForm = ({ onLogin }) => {
         margin="normal"
       />
       {error && <Typography color="error">{error}</Typography>}
-      <Button type="submit" variant="contained" color="primary">Login</Button>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '1rem' }}>
+        <Button type="submit" variant="contained" color="primary">
+          Login
+        </Button>
+      </Box>
     </Box>
   );
 };

@@ -1,8 +1,7 @@
-// src/component/RegisterForm.jsx
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { TextField, Button, Typography, Box } from '@mui/material';
+import { Link } from 'react-router-dom'; // Pastikan Link diimpor
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
@@ -15,9 +14,11 @@ const RegisterForm = () => {
     try {
       await axios.post('http://localhost:8081/api/users/register', { username, password });
       setSuccess('Registration successful!');
+      setError(''); // Reset error jika berhasil
       setUsername('');
       setPassword('');
     } catch (error) {
+      setSuccess(''); // Reset success jika gagal
       setError('Registration failed');
     }
   };
@@ -41,8 +42,21 @@ const RegisterForm = () => {
         margin="normal"
       />
       {error && <Typography color="error">{error}</Typography>}
-      {success && <Typography color="success">{success}</Typography>}
-      <Button type="submit" variant="contained" color="primary">Register</Button>
+      {success && <Typography color="success.main">{success}</Typography>}
+      <Button type="submit" variant="contained" color="primary" fullWidth>
+        Register
+      </Button>
+      <Box mt={2}>
+        <Button
+          component={Link}
+          to="/login"
+          variant="outlined"
+          color="primary"
+          fullWidth
+        >
+          Login
+        </Button>
+      </Box>
     </Box>
   );
 };
